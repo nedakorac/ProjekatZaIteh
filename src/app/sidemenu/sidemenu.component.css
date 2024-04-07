@@ -1,77 +1,54 @@
+/* Osnovni stil za body da se ukloni margin, za lepši prikaz */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Omogućava da body zauzima punu visinu */
+}
+
+/* Stil za sidebar */
 .sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto; 
-}
-.capacity-selector {
-    margin-bottom: 20px; 
-}
-
-.capacity-selector select {
-    width: 100%;
-    padding: 5px; 
-    border-radius: 5px;
-
+    background-color: #333333; /* Tamna pozadina */
+    color: #fff; /* Bela boja teksta */
+    padding: 20px; /* Unutrašnji razmak */
+    font-family: Arial, sans-serif; /* Font */
+    height: 93vh; /* Visina da zauzima celu visinu viewport-a */
+    width: 250px; /* Fiksna širina */
+    position: fixed; /* Pozicioniran fiksno da ostaje na mestu pri skrolovanju */
+    bottom: 0; /* Vrh sidebar-a poravnan sa vrhom viewport-a */
+    left: 0; /* Levi sidebar poravnan sa levom stranom viewport-a */
 }
 
-.custom-select, .custom-select-label {
-    display: block; /* Ako želite da labela bude iznad select boxa */
-    width: 100%; /* Osigurava da select box zauzima celu dostupnu širinu */
+/* Stil za sadržaj pored sidebar-a */
+.content {
+    margin-left: 250px; /* Odstupanje sadržaja za širinu sidebar-a */
+    padding: 20px; /* Razmak unutar sadržaja */
+}
+
+/* Ostali stilovi ostaju isti */
+
+/* Stil za labele i select elemente */
+.custom-select-label {
+    display: block;
+    margin-bottom: 5px; /* Razmak između labela i selecta */
 }
 
 .custom-select {
-    margin-bottom: 1rem; /* Dodaje malo prostora ispod select boxa */
-    background-color: white;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    padding: 0.375rem 0.75rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    position: relative;
+    width: 100%; /* Puna širina */
+    padding: 8px; /* Unutrašnji razmak */
+    margin-bottom: 20px; /* Razmak između elemenata */
+    background-color: #444; /* Malo svetlija pozadina od sidebar-a */
+    color: #fff; /* Bela boja teksta */
+    border: 1px solid #555; /* Boja ivice */
+    border-radius: 5px; /* Zaobljene ivice */
 }
 
-.custom-select-label {
-    margin-bottom: 0.5rem; /* Dodaje malo prostora između labele i select boxa */
+.form-control {
+    width: 100%; /* Puna širina u okviru roditeljskog elementa */
+    padding: 8px; /* Unutrašnji razmak za bolju čitljivost */
+    margin-bottom: 20px; /* Razmak između elemenata */
+    background-color: #444; /* Boja pozadine */
+    color: #fff; /* Boja teksta */
+    border: 1px solid #555; /* Boja ivice */
+    border-radius: 5px; /* Zaobljene ivice */
 }
 
-.detail-section ul li {
-    margin-bottom: 10px; /* Dodaje malo prostora između stavki liste */
-    padding: 8px; /* Dodaje prostor unutar svake stavke liste */
-    background-color: #f2f2f2; /* Svetlo siva boja pozadine za svaku stavku */
-    border-radius: 5px; /* Zaobljeni uglovi za lepši izgled */
-    list-style-type: none; /* Uklanja tradicionalne oznake za listu */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Dodaje blagu senku za dubinski efekat */
-    font-size: 16px; /* Povećava veličinu fonta za bolju čitljivost */
-}
-
-.detail-section ul {
-    padding-left: 0; /* Uklanja podrazumevani padding sa leve strane liste */
-}
-
-.equipment-selector .flex-container {
-    display: flex;       /* Aktivira flexbox layout */
-    flex-wrap: wrap;     /* Omogućava elementima da pređu u novi red ako nema dovoljno prostora */
-    padding: 0;          /* Uklanja podrazumevani padding */
-    list-style: none;    /* Uklanja podrazumevane stilove liste */
-}
-
-.equipment-selector .flex-container li {
-    margin-right: 10px;  /* Dodaje malo prostora između elemenata */
-    /* Dodatne stilizacije po potrebi */
-}
-
-  
-  .detail-section ul {
-    padding: 0;
-    list-style: none; /* Uklanja tačke iz liste */
-  }
-  
-  .detail-section li {
-    background-color: #f2f2f2; /* Primer pozadinske boje */
-    padding: 5px;
-    border-radius: 5px; /* Zaobljeni uglovi */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Senka za dubinu */
-  }
-  
