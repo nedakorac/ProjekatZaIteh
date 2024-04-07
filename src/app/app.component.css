@@ -1,0 +1,17 @@
+/* Prilagođeni stilovi za main-content kada je sideMenu false */
+.main-content.fullscreen-bg {
+    padding: 0 !important; /* Uklanja padding */
+    height: 100vh; /* Visina je 100% viewport-a */
+    width: 100vw;
+    overflow: hidden; /* Sprečava skrolovanje */
+    background: url('/assets/resized_image.png') no-repeat center center; 
+    background-size: cover; /* Osigurava da slika prekriva ceo prostor */
+}
+
+/* Resetuje body margin */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}

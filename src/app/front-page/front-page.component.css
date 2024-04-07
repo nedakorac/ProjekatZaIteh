@@ -1,0 +1,9 @@
+.frontpage {
+  width: 100vw; /* Postavlja širinu na širinu viewport-a */
+  height: 100vh; /* Postavlja visinu na visinu viewport-a */
+  background-size: cover;
+  background-position: center;
+}
+html, body {
+  overflow: hidden; 
+}
