@@ -1,0 +1,19 @@
+<iframe src="assets/random.pdf" width="100%" height="500px"></iframe>
+<hr>
+<div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <button style="margin-right: 20px;" (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary mr-2">Show Full Version</button>
+        <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success">Show Free Version</button>
+    </div>
+    <button style="margin-right: 40px;" (click)="buyVersion()" class="btn btn-danger">Buy for ??$</button>
+</div>
+<div style="margin-top: 20px;">
+    <h3>Detalji o Proizvodu</h3>
+    <p><strong>ID:</strong> 12345</p>
+    <p><strong>Naziv:</strong> Ekskluzivni Vodič kroz Angular</p>
+    <p><strong>Cena:</strong> $29.99</p>
+    <p><strong>Opis:</strong> Kompletan vodič za razvoj Angular aplikacija, sa naprednim tehnikama i najboljim praksama.</p>
+    <p><strong>Kategorija/Tema:</strong> Programiranje</p>
+    <p><strong>Autor:</strong> John Doe</p>
+    <p><strong>Broj Preuzimanja:</strong> 150</p>
+</div>

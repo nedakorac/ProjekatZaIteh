@@ -19,7 +19,11 @@
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
     "@grapecity/gcpdfviewer": "^7.0.4",
+    "@pdftron/webviewer": "^10.8.0",
     "bootstrap": "^5.2.0",
+    "ng2-pdf-viewer": "^10.0.0",
+    "ngx-extended-pdf-viewer": "^19.7.0",
+    "pdfjs-dist": "^4.0.379",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

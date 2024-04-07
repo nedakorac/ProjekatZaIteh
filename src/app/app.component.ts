@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators'; // Ispravka za import 'filter'
 
@@ -7,16 +7,42 @@ import { filter } from 'rxjs/operators'; // Ispravka za import 'filter'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] // Ispravka na 'styleUrls'
 })
-export class AppComponent {
-  sideMenu = true;
+export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
+  sideMenuActive = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private renderer: Renderer2) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.sideMenu = event.url == '/';
+      this.sideMenuActive = event.url !== '/';
+      if(!this.sideMenuActive){
+        this.renderer.addClass(document.body, 'no-scroll');
+      }
+      else{
+        this.renderer.addClass(document.body, 'scroll');
+      }
     });
+    
+  }
+  ngAfterViewChecked() {
+    // Ako je sideMenuActive false, dodajemo klasu na body da onemogući skrol
+    if (this.sideMenuActive) {
+      this.renderer.removeClass(document.body, 'no-scroll');
+    } else {
+      this.renderer.addClass(document.body, 'no-scroll');
+    }
+  }
+  ngOnDestroy() {
+    // Kada se komponenta uništi, omogući skrolovanje
+    this.renderer.removeClass(document.body, 'no-scroll');
+  }
+  set sideMenu(state: boolean) {
+    if (state) {
+      this.renderer.setStyle(document.body, 'overflow', 'hidden');
+    } else {
+      this.renderer.removeStyle(document.body, 'overflow');
+    }
   }
 }

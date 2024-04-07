@@ -1,18 +1,21 @@
 <app-header></app-header>
 <div>
-    <div *ngIf="!sideMenu">
-        <div class="row">
-            <!-- Sidebar, prikazuje se samo ako nije početna stranica -->
-            <div class="col-md-2 bg-light vh-100" style="padding-left: 30px; padding-top: 10px;">
-                <app-sidemenu></app-sidemenu>
-            </div>
-            <!-- Glavni sadržaj, dinamički postavlja klase na osnovu rute -->
-            <div class="col-md-10" style="padding: 20px;">
-                <router-outlet></router-outlet>
+    <div class="container-fluid"  *ngIf="sideMenuActive">
+        <div>
+            <div class="row">
+                <!-- Sidebar, prikazuje se samo ako nije početna stranica -->
+                <div class="col-md-2 bg-light vh-100" style="padding-left: 30px; padding-top: 10px;">
+                    <app-sidemenu></app-sidemenu>
+                </div>
+                <!-- Glavni sadržaj, dinamički postavlja klase na osnovu rute -->
+                <div class="col-md-10" style="padding: 20px;">
+                    <router-outlet></router-outlet>
+                </div>
             </div>
         </div>
     </div>
-    <div *ngIf="sideMenu">
+    
+    <div *ngIf="!sideMenuActive">
         <app-front-page></app-front-page>
     </div>
 </div>

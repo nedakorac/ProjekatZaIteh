@@ -10,10 +10,15 @@ import { PdfsComponent } from './components/pdfs/pdfs.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { PdfComponent } from './detailedView/pdf/pdf.component';
+import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ImageDetailsComponent } from './components/images/image-details/image-details.component';
 
 const routes: Routes = [
+  { path: 'images/:id', component: ImageDetailsComponent },
   { path: 'images', component: ImagesComponent },
-  { path: 'pdfs', component: PdfsComponent },
+  { path: 'pdfs', component: PdfComponent },
   { path: 'videos', component: VideosComponent },
   { path: '', component: FrontPageComponent },
 ];
@@ -27,13 +32,15 @@ const routes: Routes = [
     PdfsComponent,
     FrontPageComponent,
     HeaderComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    PdfComponent,
+    ImageDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
-
+    PdfViewerModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
