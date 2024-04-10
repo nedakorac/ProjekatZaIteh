@@ -1,0 +1,21 @@
+<div class="image-detail-container" style="max-width: 100%; margin: auto;">
+
+    <iframe src="assets/random.pdf" width="100%" height="500px"></iframe>
+</div>
+<div>
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 15px;">
+        <div>
+            <button (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary" style="margin-right: 10px;">Show Full Version</button>
+            <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success" style="margin-right: 10px;">Show Free Version</button>
+        </div>
+        <button (click)="buyVersion()" class="btn btn-danger">Buy for {{selectedVideo.price | currency:'USD'}}</button>
+    </div>
+
+    <div class="image-details" style="padding: 0 15px; text-align: left;">
+        <h2>{{ selectedVideo.title }}</h2>
+        <p><strong>Description:</strong> {{selectedVideo.description}}</p>
+        <p><strong>Theme:</strong> {{selectedVideo.theme}}</p>
+        <p><strong>Author:</strong> {{selectedVideo.author}}</p>
+        <p><strong>Download Count:</strong> {{selectedVideo.downloadCount}}</p>
+    </div>
+</div>

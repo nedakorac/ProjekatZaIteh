@@ -3,11 +3,11 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Iteracija kroz niz images -->
-                <div *ngFor="let image of videos" class="col-md-12">
+                <div *ngFor="let image of pdfs" class="col-md-12">
                     <div class="image-box" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; align-items: center;">
                         <!-- Prikaz slike sa routerLink -->
                         <div style="flex: 1; margin-right: 20px; cursor: pointer;">
-                            <img [routerLink]="['/videos', image.id]" src="{{ image.displayImage }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
+                            <img [routerLink]="['/pdfs', image.id]" src="{{ image.displayImage }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
                         </div>
                         <!-- Prikaz detalja slike -->
                         <div style="flex: 2;">

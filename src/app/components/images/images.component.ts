@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from '../../services/image.service';
-import { Image } from '../../models/image';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-images',
@@ -9,7 +9,7 @@ import { Image } from '../../models/image';
 })
 export class ImagesComponent implements OnInit{
 
-  images?: Image[] ;
+  images?: Product[] ;
 
   constructor(private imageService: ImageService){
 

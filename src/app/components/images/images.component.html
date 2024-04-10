@@ -7,7 +7,7 @@
                     <div class="image-box" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; align-items: center;">
                         <!-- Prikaz slike sa routerLink -->
                         <div style="flex: 1; margin-right: 20px; cursor: pointer;">
-                            <img [routerLink]="['/images', image.id]" src="{{ image.lowQualityImage }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
+                            <img [routerLink]="['/images', image.id]" src="{{ image.displayImage }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
                         </div>
                         <!-- Prikaz detalja slike -->
                         <div style="flex: 2;">

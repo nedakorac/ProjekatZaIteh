@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ImageService } from '../../../services/image.service';
+import { VideoService } from '../../../services/video.service';
 import { Product } from '../../../models/product';
 
 @Component({
-  selector: 'app-image-details',
-  templateUrl: './image-details.component.html',
-  styleUrl: './image-details.component.css'
+  selector: 'app-video-details',
+  templateUrl: './video-details.component.html',
+  styleUrl: './video-details.component.css'
 })
-export class ImageDetailsComponent implements OnInit {
-
-  selectedImage!: Product;
+export class VideoDetailsComponent {
+  selectedVideo!: Product;
   isFullVersion: boolean = false;
   isFreeVersion: boolean = true; 
 
   isOwner: boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private imageService: ImageService){
+  constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService){
 
   }
 
   ngOnInit(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.selectedImage = this.imageService.images.at(id)!;
+    this.selectedVideo = this.videoService.videos.at(id)!;
   }
 
   setVersion(version: string): void {
@@ -43,6 +42,4 @@ export class ImageDetailsComponent implements OnInit {
     //ODRADI OVO
      }
  
-
-
 }

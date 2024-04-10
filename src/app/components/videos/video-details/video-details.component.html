@@ -1,6 +1,6 @@
 <div class="image-detail-container" style="max-width: 800px; margin: auto;">
 
-    <img src="{{ selectedImage.freeVersion }}" class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;">
+    <img src="{{ selectedVideo.freeVersion }}" class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;">
 </div>
 <div>
     <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 15px;">
@@ -8,14 +8,14 @@
             <button (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary" style="margin-right: 10px;">Show Full Version</button>
             <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success" style="margin-right: 10px;">Show Free Version</button>
         </div>
-        <button (click)="buyVersion()" class="btn btn-danger">Buy for {{selectedImage.price | currency:'USD'}}</button>
+        <button (click)="buyVersion()" class="btn btn-danger">Buy for {{selectedVideo.price | currency:'USD'}}</button>
     </div>
 
     <div class="image-details" style="padding: 0 15px; text-align: left;">
-        <h2>{{ selectedImage.title }}</h2>
-        <p><strong>Description:</strong> {{selectedImage.description}}</p>
-        <p><strong>Theme:</strong> {{selectedImage.theme}}</p>
-        <p><strong>Author:</strong> {{selectedImage.author}}</p>
-        <p><strong>Download Count:</strong> {{selectedImage.downloadCount}}</p>
+        <h2>{{ selectedVideo.title }}</h2>
+        <p><strong>Description:</strong> {{selectedVideo.description}}</p>
+        <p><strong>Theme:</strong> {{selectedVideo.theme}}</p>
+        <p><strong>Author:</strong> {{selectedVideo.author}}</p>
+        <p><strong>Download Count:</strong> {{selectedVideo.downloadCount}}</p>
     </div>
 </div>

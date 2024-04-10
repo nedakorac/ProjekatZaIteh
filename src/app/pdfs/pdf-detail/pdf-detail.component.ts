@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ImageService } from '../../../services/image.service';
-import { Product } from '../../../models/product';
+import { PdfService } from '../../services/pdf.service';
+import { Product } from '../../models/product';
 
 @Component({
-  selector: 'app-image-details',
-  templateUrl: './image-details.component.html',
-  styleUrl: './image-details.component.css'
+  selector: 'app-pdf-detail',
+  templateUrl: './pdf-detail.component.html',
+  styleUrl: './pdf-detail.component.css'
 })
-export class ImageDetailsComponent implements OnInit {
-
-  selectedImage!: Product;
+export class PdfDetailComponent {
+  selectedVideo!: Product;
   isFullVersion: boolean = false;
   isFreeVersion: boolean = true; 
 
   isOwner: boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private imageService: ImageService){
+  constructor(private activatedRoute: ActivatedRoute, private pdfService: PdfService){
 
   }
 
   ngOnInit(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.selectedImage = this.imageService.images.at(id)!;
+    this.selectedVideo = this.pdfService.pdfs.at(id)!;
   }
 
   setVersion(version: string): void {
@@ -42,7 +41,4 @@ export class ImageDetailsComponent implements OnInit {
   buyVersion() {
     //ODRADI OVO
      }
- 
-
-
 }
