@@ -1,20 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { VideoService } from '../../services/video.service';
 import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-videos',
   templateUrl: './videos.component.html',
-  styleUrl: './videos.component.css'
+  styleUrls: ['./videos.component.css']
 })
-export class VideosComponent {
-  videos?: Product[] ;
+export class VideosComponent implements OnInit, OnDestroy {
+  videos: Product[] = [];
+  private subscription!: Subscription;
 
-  constructor(private videoService: VideoService){
-
-  }
+  constructor(private videoService: VideoService) {}
 
   ngOnInit(): void {
-    this.videos = this.videoService.videos;
+    this.subscription = this.videoService.loadVideosByType().subscribe({
+      next: (videos) => {
+        this.videos = videos;
+        console.log(videos);
+      },
+      error: (error) => console.error('Failed to load videos', error)
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

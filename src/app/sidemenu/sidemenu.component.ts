@@ -22,7 +22,6 @@ export class SidemenuComponent implements OnInit{
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.selectedPage = event.url;
-      console.log(this.selectedPage);
     });
   }
 

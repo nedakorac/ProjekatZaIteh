@@ -1,17 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
-
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PdfService {
-  pdfs = [
-    new Product(1, 'PDF', 20.0, 'Beautiful sunset at the beach.', 'Nature', 'Author A', 50, 'C:\Users\brati\Desktop\DigiStore\src\assets\random.pdf', 'C:\Users\brati\Desktop\DigiStore\src\assets\random.pdf', 'assets/pozadina.jpg'),
-    new Product(2, 'PDF', 30.0, 'Snowy mountain peak.', 'Adventure', 'Author B', 75, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(3, 'PDF', 15.0, 'Green forest in spring.', 'Nature', 'Author C', 20, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(4, 'PDF', 25.0, 'City skyline at night.', 'Urban', 'Author D', 100, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(5, 'PDF', 10.0, 'Expansive desert dunes.', 'Travel', 'Author E', 30, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg')
-];
+  private pdfsSubject = new BehaviorSubject<Product[]>([]);
+  public pdfs$ = this.pdfsSubject.asObservable();
+
+  constructor(private httpClient: HttpClient) {}
+
+  loadPdfsByType(): Observable<Product[]> {
+    let type = "pdf"; 
+    return this.httpClient.get<{ data: Product[] }>(`http://127.0.0.1:8000/api/products/${type}`).pipe(
+      map(response => response.data.map(pdf => new Product(
+        pdf.product_id,
+        pdf.name,
+        pdf.price,
+        pdf.type,
+        pdf.category,
+        pdf.author,
+        pdf.num_of_downloads,
+        `http://127.0.0.1:8000/${pdf.full_product}`,  
+        `http://127.0.0.1:8000/${pdf.free_version}`,  
+        `http://127.0.0.1:8000/${pdf.imageUrl}`
+      ))),
+      tap(pdfs => {
+        console.log(pdfs);
+        this.pdfsSubject.next(pdfs);
+      }),
+      catchError(error => {
+        console.error('Error loading PDFs:', error);
+        return throwError(() => new Error('Error loading PDFs'));
+      })
+    );
+  }
 
 }

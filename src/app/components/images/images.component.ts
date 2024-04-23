@@ -1,23 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ImageService } from '../../services/image.service';
 import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-images',
   templateUrl: './images.component.html',
-  styleUrl: './images.component.css'
+  styleUrls: ['./images.component.css']
 })
-export class ImagesComponent implements OnInit{
+export class ImagesComponent implements OnInit, OnDestroy {
+  images: Product[] = [];
+  private subscription!: Subscription;
 
-  images?: Product[] ;
-
-  constructor(private imageService: ImageService){
-
-  }
+  constructor(private imageService: ImageService) {}
 
   ngOnInit(): void {
-    this.images = this.imageService.images;
+    this.subscription = this.imageService.loadImagesByType('image').subscribe({
+      next: (images) => {
+        this.images = images;
+      },
+      error: (error) => console.error('Failed to load images', error) 
+    });
   }
 
-
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

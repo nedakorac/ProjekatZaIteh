@@ -1,20 +1,32 @@
-import { Component } from '@angular/core';
-import { Product } from '../models/product';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { PdfService } from '../services/pdf.service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-pdfs',
   templateUrl: './pdfs.component.html',
-  styleUrl: './pdfs.component.css'
+  styleUrls: ['./pdfs.component.css']
 })
-export class PdfsComponent {
-  pdfs?: Product[] ;
+export class PdfsComponent implements OnInit, OnDestroy {
+  pdfs: Product[] = [];
+  private subscription!: Subscription;
 
-  constructor(private pdfService: PdfService){
-
-  }
+  constructor(private pdfService: PdfService) {}
 
   ngOnInit(): void {
-    this.pdfs = this.pdfService.pdfs;
+    this.subscription = this.pdfService.loadPdfsByType().subscribe({
+      next: (pdfs) => {
+        this.pdfs = pdfs;
+        console.log(pdfs);
+      },
+      error: (error) => console.error('Failed to load PDFs', error)
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

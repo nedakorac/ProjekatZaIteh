@@ -1,18 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
 
-  images = [
-    new Product(1, 'Sunset', 20.0, 'Beautiful sunset at the beach.', 'Nature', 'Author A', 50, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(2, 'Mountain', 30.0, 'Snowy mountain peak.', 'Adventure', 'Author B', 75, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(3, 'Forest', 15.0, 'Green forest in spring.', 'Nature', 'Author C', 20, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(4, 'Cityscape', 25.0, 'City skyline at night.', 'Urban', 'Author D', 100, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg'),
-    new Product(5, 'Desert', 10.0, 'Expansive desert dunes.', 'Travel', 'Author E', 30, 'assets/pozadina.jpg', 'assets/pozadina.jpg', 'assets/pozadina.jpg')
-];
+  private imagesSubject = new BehaviorSubject<Product[]>([]);
+  public images$ = this.imagesSubject.asObservable();
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {}
+
+  loadImagesByType(type: string): Observable<Product[]> {
+    return this.httpClient.get<{ data: Product[] }>(`http://127.0.0.1:8000/api/products/${type}`).pipe(
+      map(response => response.data.map(image => new Product(
+        image.product_id,  
+        image.name,
+        image.price,
+        image.type,
+        image.category,
+        image.author,
+        image.num_of_downloads,
+        `http://127.0.0.1:8000/${image.full_product}`,  
+        `http://127.0.0.1:8000/${image.free_version}`,  
+        `http://127.0.0.1:8000/${image.imageUrl}`      
+      ))),
+      tap(images => {
+        console.log(images);
+        this.imagesSubject.next(images);
+      }),
+      catchError(error => {
+        console.error('Error loading images:', error);
+        return throwError(() => new Error('Error loading images'));
+      })
+    );
+  }
 }

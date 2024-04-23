@@ -1,6 +1,6 @@
 <div class="image-detail-container" style="max-width: 800px; margin: auto;">
 
-    <img src="{{ selectedImage.freeVersion }}" class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;">
+    <img src="{{ selectedImage.free_version }}" class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;">
 </div>
 <div>
     <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 15px;">
@@ -12,10 +12,9 @@
     </div>
 
     <div class="image-details" style="padding: 0 15px; text-align: left;">
-        <h2>{{ selectedImage.title }}</h2>
-        <p><strong>Description:</strong> {{selectedImage.description}}</p>
-        <p><strong>Theme:</strong> {{selectedImage.theme}}</p>
+        <h2>{{ selectedImage.name }}</h2>
+        <p><strong>Theme:</strong> {{selectedImage.category}}</p>
         <p><strong>Author:</strong> {{selectedImage.author}}</p>
-        <p><strong>Download Count:</strong> {{selectedImage.downloadCount}}</p>
+        <p><strong>Download Count:</strong> {{selectedImage.num_of_downloads}}</p>
     </div>
 </div>

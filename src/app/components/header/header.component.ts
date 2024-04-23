@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+
+  isAuthenticated = false;
+
+
+  onLogout() {
+    throw new Error('Method not implemented.');
+    }
 }

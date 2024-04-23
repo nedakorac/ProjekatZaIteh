@@ -1,24 +1,23 @@
-<div class="main-content">
+<div *ngIf="pdfs" class="main-content">
     <div class="section-content section-content-p30">
         <div class="container-fluid">
             <div class="row">
-                <!-- Iteracija kroz niz images -->
-                <div *ngFor="let image of pdfs" class="col-md-12">
+                <!-- Iteracija kroz niz pdf-ova -->
+                <div *ngFor="let pdf of pdfs" class="col-md-12">
                     <div class="image-box" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; align-items: center;">
-                        <!-- Prikaz slike sa routerLink -->
+                        <!-- Prikaz ikonice PDF sa routerLink -->
                         <div style="flex: 1; margin-right: 20px; cursor: pointer;">
-                            <img [routerLink]="['/pdfs', image.id]" src="{{ image.displayImage }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
+                            <img [routerLink]="['/pdfs', pdf.product_id]" src="{{ pdf.imageUrl }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
                         </div>
-                        <!-- Prikaz detalja slike -->
+                        <!-- Prikaz detalja PDF-a -->
                         <div style="flex: 2;">
-                            <p><strong>Title:</strong> {{image.title}}</p>
-                            <p><strong>Description:</strong> {{image.description}}</p>
-                            <p><strong>Theme:</strong> {{image.theme}}</p>
-                            <p><strong>Author:</strong> {{image.author}}</p>
-                            <p><strong>Download Count:</strong> {{image.downloadCount}}</p>
-                            <p><strong>Price:</strong> {{image.price | currency:'USD'}}</p>
-                            <!-- Link ka originalnoj slici sa routerLink -->
-                            <p><a [routerLink]="['/images', image.id]">View Original</a></p> <!-- Dodat routerLink -->
+                            <p><strong>Title:</strong> {{pdf.name}}</p>
+                            <p><strong>Theme:</strong> {{pdf.category}}</p>
+                            <p><strong>Author:</strong> {{pdf.author}}</p>
+                            <p><strong>Download Count:</strong> {{pdf.num_of_downloads}}</p>
+                            <p><strong>Price:</strong> {{pdf.price | currency:'USD'}}</p>
+                            <!-- Link ka detaljima PDF-a sa routerLink -->
+                            <p><a [routerLink]="['/pdfs', pdf.product_id]">View Details</a></p> <!-- Izmenjen routerLink -->
                         </div>
                     </div>
                 </div>

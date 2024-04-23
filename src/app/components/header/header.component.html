@@ -15,5 +15,14 @@
         <a class="nav-link" routerLink="pdfs">PDFs</a>
       </li>
     </ul>
+    <ul class="navbar-nav ms-auto"> 
+      <li *ngIf="!isAuthenticated" class="nav-item">
+          <a class="btn btn-dark" style="width: 100px;" routerLink="/login">Login</a>
+      </li>
+      <li *ngIf="isAuthenticated" class="nav-item">
+          <a class="btn btn-dark" style="width: 100px;" (click)="onLogout()" >Logout</a>
+      </li>
+      <div style="width: 100px;"></div>
+  </ul>
   </div>
 </nav>

@@ -13,11 +13,15 @@ import { PdfComponent } from './detailedView/pdf/pdf.component';
 import { NgxExtendedPdfViewerComponent, NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ImageDetailsComponent } from './components/images/image-details/image-details.component';
-import { VideoDetailsComponent } from './components/videos/video-details/video-details.component';
+import { VideoDetailsComponent } from './videos/video-details/video-details.component';
 import { PdfsComponent } from './pdfs/pdfs.component';
 import { PdfDetailComponent } from './pdfs/pdf-detail/pdf-detail.component';
+import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SafePipe } from './safe.pipe';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'images/:id', component: ImageDetailsComponent },
   { path: 'images', component: ImagesComponent },
   { path: 'pdfs/:id', component: PdfDetailComponent },
@@ -40,13 +44,16 @@ const routes: Routes = [
     PdfComponent,
     ImageDetailsComponent,
     VideoDetailsComponent,
-    PdfDetailComponent
+    PdfDetailComponent,
+    LoginComponent,
+    SafePipe
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
-    PdfViewerModule 
+    PdfViewerModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
