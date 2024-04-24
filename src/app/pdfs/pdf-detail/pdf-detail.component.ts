@@ -15,9 +15,10 @@ export class PdfDetailComponent implements OnInit, OnDestroy {
   safeUrl!: SafeResourceUrl;
   isFullVersion: boolean = false;
   isFreeVersion: boolean = true;
-  isOwner: boolean = false;
+  isOwner: boolean = true;
   subscription!: Subscription;
   ready = false;
+  displayedPdf!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -43,13 +44,22 @@ export class PdfDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+
   setVersion(version: string): void {
-    if (version === 'full' && !this.isOwner) {
-      alert("You do not own the full version! You must buy it first in order to access it.");
-      return;
+    if (version === 'full') {
+      if (!this.isOwner) {
+        alert("You do not own the full version! You must buy it first in order to access it.");
+        return;
+      }
+      this.isFullVersion = true;
+      this.isFreeVersion = false;
+      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.selectedPdf.full_product);
+      } else if (version === 'free') {
+      this.isFullVersion = false;
+      this.isFreeVersion = true;
+      this.displayedPdf= this.selectedPdf.free_version;
+      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.selectedPdf.free_version);
     }
-    this.isFullVersion = (version === 'full');
-    this.isFreeVersion = !this.isFullVersion;
   }
 
   buyVersion(): void {

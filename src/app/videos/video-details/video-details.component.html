@@ -1,7 +1,7 @@
 <div *ngIf="selectedVideo">
     <div class="image-detail-container" style="max-width: 800px; margin: auto;">
         <!-- Video Player -->
-        <video [src]="selectedVideo.free_version " controls class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;"> </video>
+        <video [src]="displayedVideo" controls class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;"> </video>
     </div>
     <div>
         <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 15px;">
@@ -14,7 +14,7 @@
 
         <div class="image-details" style="padding: 0 15px; text-align: left;">
             <h2>{{ selectedVideo.name }}</h2>
-            <p><strong>Theme:</strong> {{selectedVideo.category}}</p>
+            <p><strong>Category:</strong> {{selectedVideo.category}}</p>
             <p><strong>Author:</strong> {{selectedVideo.author}}</p>
             <p><strong>Download Count:</strong> {{selectedVideo.num_of_downloads}}</p>
         </div>

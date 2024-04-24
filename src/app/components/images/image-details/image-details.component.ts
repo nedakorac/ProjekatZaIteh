@@ -13,8 +13,9 @@ export class ImageDetailsComponent implements OnInit, OnDestroy {
   selectedImage!: Product;
   isFullVersion: boolean = false;
   isFreeVersion: boolean = true;
-  isOwner: boolean = false;
+  isOwner: boolean = true;
   subscription!: Subscription;
+  displayedImage!: string;
 
   constructor(private activatedRoute: ActivatedRoute, private imageService: ImageService) {}
 
@@ -24,6 +25,7 @@ export class ImageDetailsComponent implements OnInit, OnDestroy {
       const image = images.find(i => i.product_id === id);
       if (image) {
         this.selectedImage = image;
+        this.displayedImage = image.free_version;
       }
     });
   }
@@ -42,9 +44,11 @@ export class ImageDetailsComponent implements OnInit, OnDestroy {
       }
       this.isFullVersion = true;
       this.isFreeVersion = false;
+      this.displayedImage = this.selectedImage.full_product;
     } else if (version === 'free') {
       this.isFullVersion = false;
       this.isFreeVersion = true;
+      this.displayedImage = this.selectedImage.free_version;
     }
   }
 

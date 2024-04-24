@@ -13,8 +13,10 @@ export class VideoDetailsComponent implements OnInit, OnDestroy {
   @Input() selectedVideo!: Product;
   isFullVersion: boolean = false;
   isFreeVersion: boolean = true;
-  isOwner: boolean = false;
+  isOwner: boolean = true;
   subscription!: Subscription;
+  displayedVideo!: string;
+
 
   constructor(private activatedRoute: ActivatedRoute, private videoService: VideoService) { }
 
@@ -25,6 +27,7 @@ export class VideoDetailsComponent implements OnInit, OnDestroy {
         const video = videos.find(v => v.product_id === id);
         if (video) {
           this.selectedVideo = video;
+          this.displayedVideo = video.free_version;
         }
       });
     }
@@ -44,9 +47,11 @@ export class VideoDetailsComponent implements OnInit, OnDestroy {
       }
       this.isFullVersion = true;
       this.isFreeVersion = false;
+      this.displayedVideo = this.selectedVideo.full_product;
     } else if (version === 'free') {
       this.isFullVersion = false;
       this.isFreeVersion = true;
+      this.displayedVideo = this.selectedVideo.free_version;
     }
   }
 
