@@ -15,11 +15,11 @@ export class ImagesComponent implements OnInit, OnDestroy {
   constructor(private imageService: ImageService) {}
 
   ngOnInit(): void {
-    this.subscription = this.imageService.loadImagesByType('image').subscribe({
+    this.subscription = this.imageService.images$.subscribe({
       next: (images) => {
         this.images = images;
       },
-      error: (error) => console.error('Failed to load images', error) 
+      error: (error) => console.error('Failed to load images', error)
     });
   }
 

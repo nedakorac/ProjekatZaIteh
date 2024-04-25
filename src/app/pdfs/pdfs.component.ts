@@ -15,12 +15,11 @@ export class PdfsComponent implements OnInit, OnDestroy {
   constructor(private pdfService: PdfService) {}
 
   ngOnInit(): void {
-    this.subscription = this.pdfService.loadPdfsByType().subscribe({
+    this.subscription = this.pdfService.pdfs$.subscribe({
       next: (pdfs) => {
         this.pdfs = pdfs;
-        console.log(pdfs);
       },
-      error: (error) => console.error('Failed to load PDFs', error)
+      error: (error) => console.error('Failed to load pdfs', error)
     });
   }
 

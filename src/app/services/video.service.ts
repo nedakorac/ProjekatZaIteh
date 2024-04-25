@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'r
 })
 export class VideoService {
 
+
   private videosSubject = new BehaviorSubject<Product[]>([]);
   public videos$ = this.videosSubject.asObservable();
 
@@ -38,4 +39,10 @@ export class VideoService {
       })
     );
   }
+
+  filterVideos(filteredProducts: Product[]) {
+    console.log(filteredProducts);
+    this.videosSubject.next(filteredProducts);
+  }
+
 }

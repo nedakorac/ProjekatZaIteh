@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ImageService {
 
+
   private imagesSubject = new BehaviorSubject<Product[]>([]);
   public images$ = this.imagesSubject.asObservable();
 
@@ -28,7 +29,6 @@ export class ImageService {
         `http://127.0.0.1:8000/${image.imageUrl}`      
       ))),
       tap(images => {
-        console.log(images);
         this.imagesSubject.next(images);
       }),
       catchError(error => {
@@ -37,4 +37,11 @@ export class ImageService {
       })
     );
   }
+
+  filterImages(filteredProducts: Product[]) {
+    console.log(filteredProducts);
+    this.imagesSubject.next(filteredProducts);
+  }
+
+
 }

@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'r
   providedIn: 'root'
 })
 export class PdfService {
+ 
   private pdfsSubject = new BehaviorSubject<Product[]>([]);
   public pdfs$ = this.pdfsSubject.asObservable();
 
@@ -36,6 +37,10 @@ export class PdfService {
         return throwError(() => new Error('Error loading PDFs'));
       })
     );
+  }
+  filterPdfs(filteredProducts: Product[]) {
+    console.log(filteredProducts);
+    this.pdfsSubject.next(filteredProducts);
   }
 
 }

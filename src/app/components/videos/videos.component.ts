@@ -14,11 +14,11 @@ export class VideosComponent implements OnInit, OnDestroy {
 
   constructor(private videoService: VideoService) {}
 
+
   ngOnInit(): void {
-    this.subscription = this.videoService.loadVideosByType().subscribe({
+    this.subscription = this.videoService.videos$.subscribe({
       next: (videos) => {
         this.videos = videos;
-        console.log(videos);
       },
       error: (error) => console.error('Failed to load videos', error)
     });

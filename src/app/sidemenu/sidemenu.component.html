@@ -2,7 +2,7 @@
     <!-- Start of Category Select -->
     <div class="type-selector">
         <label for="productCategory" class="custom-select-label">Category:</label>
-        <select id="productCategory" class="custom-select">
+        <select id="productCategory" class="custom-select" #category>
             <option value="none">-</option>
             <option value="Nature">Nature</option>
             <option value="Animals">Animals</option>
@@ -16,44 +16,22 @@
     <!-- Start of Price Select -->
     <div class="price-selector">
         <label for="price" class="custom-select-label">Price:</label>
-        <select id="price" class="custom-select">
+        <select id="price" class="custom-select" #price>
             <option value="none">-</option>
             <option value="Free">Free</option>
-            <option value="<20">$0 - $19.99</option>
+            <option value="<0-20">$0 - $19.99</option>
             <option value="20-30">$20 - $30</option>
-            <option value=">30">$30+</option>
+            <option value="30+">$30+</option>
         </select>
     </div>
     <!-- End of Price Select -->
-     <!-- Start of Search by Author -->
-  <div class="author-search mt-3">
-    <label for="searchAuthor" class="form-label">Search by Author:</label>
-    <input type="text" id="searchAuthor" class="form-control" placeholder="Enter author's name">
-</div>
-<!-- End of Search by Author -->
-<!-- Ovo smo izmenili tako da nam vise ne treba
-    <div *ngIf="selectedPage === '/videos'" class="video-length-selector">
-        <label for="videoLength" class="custom-select-label">Video Length:</label>
-        <select id="videoLength" class="custom-select">
-            <option value="none">-</option>
-            <option value="0-2">0-2 minutes</option>
-            <option value="2-3">2-3 minutes</option>
-            <option value="3+">3+ minutes</option>
-        </select>
+
+    <!-- Start of Search by Author -->
+    <div class="author-search mt-3">
+        <label for="searchAuthor" class="form-label">Search by Author:</label>
+        <input type="text" id="searchAuthor" class="form-control" placeholder="Enter author's name" #author>
     </div>
-    
-    <div *ngIf="selectedPage === '/pdfs'" class="page-number-selector">
-        <label for="pageNumber" class="custom-select-label">Number of Pages:</label>
-        <select id="pageNumber" class="custom-select">
-            <option value="none">-</option>
-            <option value="<10">Less than 10</option>
-            <option value="10-20">10-20</option>
-            <option value="20-50">20-50</option>
-            <option value="50+">50+</option>
-        </select>
-    </div>
- -->
     <hr>
-    <button id="clearAll" class="btn btn-secondary mt-2">Clear All</button>
-    
+    <button id="clearAll" class="btn btn-secondary mt-2" (click)="clearFilters()" #clearAll>Clear All</button>
+    <button style="margin-left: 20px;" id="filterButton" class="btn btn-primary mt-2" #filterButton (click)="filterProducts()">Filter</button>
 </div>
