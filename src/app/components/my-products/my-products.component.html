@@ -1,0 +1,27 @@
+<div *ngIf="products" class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Iteracija kroz niz images -->
+                <div *ngFor="let product of products" class="col-md-12">
+                    <div class="image-box" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; align-items: center;">
+                        <!-- Prikaz slike sa routerLink -->
+                        <div style="flex: 1; margin-right: 20px; cursor: pointer;">
+                            <img [routerLink]="['/images', product.product_id]" src="{{ product.imageUrl }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
+                        </div>
+                        <!-- Prikaz detalja slike -->
+                        <div style="flex: 2;">
+                            <p><strong>Title:</strong> {{product.name}}</p>
+                            <p><strong>Category:</strong> {{product.category}}</p>
+                            <p><strong>Author:</strong> {{product.author}}</p>
+                            <p><strong>Download Count:</strong> {{product.num_of_downloads}}</p>
+                            <p><strong>Price:</strong> {{product.price | currency:'USD'}}</p>
+                            <!-- Link ka detaljima slike sa routerLink -->
+                            <p><a [routerLink]="[product.type, product.product_id]">View Details</a></p> <!-- Dodat routerLink -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { first } from 'rxjs';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent {
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   login(loginEmail: HTMLInputElement, loginPassword: HTMLInputElement) {
     const email = loginEmail.value;
@@ -20,6 +21,7 @@ export class LoginComponent {
 
     if(succesfullyLoggedIn){
       alert("Uspesno ste se ulogovali!");
+      this.router.navigate(['/images']);  
     }
     else{
       alert("Neuspesno logovanje");

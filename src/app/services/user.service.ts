@@ -31,6 +31,7 @@ export class UserService {
       .pipe(
         map(user => {
           let newUser = new User(user.user.id, user.user.name, user.user.email, undefined, user.token);
+          this.loggedInUser.next(newUser);
           return true;
         }), 
         catchError(error => of(false)) 
