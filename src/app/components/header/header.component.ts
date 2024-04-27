@@ -9,22 +9,13 @@ import { UserService } from '../../services/user.service';
 export class HeaderComponent implements OnInit{
 
 
-  isAuthenticated!: boolean;
 
-  constructor(private userServicie: UserService){}
+  constructor(public userService: UserService){}
 
   ngOnInit(): void {
-    this.userServicie.user$.subscribe(user =>{
-      if(user.id == 0){
-        this.isAuthenticated = false;
-      }
-      else{
-        this.isAuthenticated = true;
-      }
-    })
   }
 
   onLogout() {
-    throw new Error('Method not implemented.');
-    }
+  this.userService.logout();  
+  }
 }

@@ -7,7 +7,7 @@
                     <div class="image-box" style="margin-bottom: 20px; border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; align-items: center;">
                         <!-- Prikaz slike sa routerLink -->
                         <div style="flex: 1; margin-right: 20px; cursor: pointer;">
-                            <img [routerLink]="['/images', product.product_id]" src="{{ product.imageUrl }}" class="img-fluid" style="max-width: 300px;"> <!-- Dodat routerLink -->
+                            <img [routerLink]="['/'+product.type+'s',product.product_id]"    src="{{ product.imageUrl }}" class="img-fluid" style="max-width: 300px;">
                         </div>
                         <!-- Prikaz detalja slike -->
                         <div style="flex: 2;">
@@ -17,7 +17,7 @@
                             <p><strong>Download Count:</strong> {{product.num_of_downloads}}</p>
                             <p><strong>Price:</strong> {{product.price | currency:'USD'}}</p>
                             <!-- Link ka detaljima slike sa routerLink -->
-                            <p><a [routerLink]="[product.type, product.product_id]">View Details</a></p> <!-- Dodat routerLink -->
+                            <p><a [routerLink]="['/'+product.type+'s',product.product_id]">View Details</a></p> <!-- Dodat routerLink -->
                         </div>
                     </div>
                 </div>

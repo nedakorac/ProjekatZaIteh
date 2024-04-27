@@ -38,6 +38,31 @@ export class PdfService {
       })
     );
   }
+
+  getProductById(id: number): Observable<Product> {
+    return this.httpClient.get<{data: Product}>(`http://127.0.0.1:8000/api/products/${id}`).pipe(
+      map(response => {
+        const pdf = response.data;
+        return new Product(
+          pdf.product_id,  
+          pdf.name,
+          pdf.price,
+          pdf.type,
+          pdf.category,
+          pdf.author,
+          pdf.num_of_downloads,
+          `http://127.0.0.1:8000/${pdf.full_product}`,  
+          `http://127.0.0.1:8000/${pdf.free_version}`,  
+          `http://127.0.0.1:8000/${pdf.imageUrl}`
+        );
+      }),
+      catchError(error => {
+        console.error('Error loading product:', error);
+        return throwError(() => new Error('Error loading product'));
+      })
+    );
+  }
+  
   filterPdfs(filteredProducts: Product[]) {
     console.log(filteredProducts);
     this.pdfsSubject.next(filteredProducts);

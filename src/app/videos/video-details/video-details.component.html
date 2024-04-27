@@ -1,22 +1,46 @@
 <div *ngIf="selectedVideo">
     <div class="image-detail-container" style="max-width: 800px; margin: auto;">
-        <!-- Video Player -->
         <video [src]="displayedVideo" controls class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;"> </video>
+
     </div>
     <div>
-        <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 15px;">
-            <div>
-                <button (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary" style="margin-right: 10px;">Show Full Version</button>
-                <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success" style="margin-right: 10px;">Show Free Version</button>
+        <div style="display: flex; width: 100%;">
+            <!-- Leva kolona -->
+            <div style="width: 70%; padding-right: 20px;">
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <div>
+                        <button (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary"
+                            style="margin-right: 10px;">Show Full Version</button>
+                        <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success"
+                            style="margin-right: 10px;">Show Free Version</button>
+                    </div>
+                </div>
+
+                <div class="image-details" style="text-align: left;">
+                    <h2>{{ selectedVideo.name }}</h2>
+                    <p><strong>Category:</strong> {{selectedVideo.category}}</p>
+                    <p><strong>Author:</strong> {{selectedVideo.author}}</p>
+                    <p><strong>Download Count:</strong> {{selectedVideo.num_of_downloads}}</p>
+                </div>
             </div>
-            <button (click)="buyVersion()" class="btn btn-danger">Buy for {{selectedVideo.price | currency:'USD'}}</button>
+
+            <!-- Desna kolona -->
+            <div style="width: 30%; padding-left: 20px; margin-right: 50px;">
+                <button [disabled]="!userService.isAuthenticated" (click)="buyVersion()" class="btn btn-danger"
+                    style="width: 100%; margin-bottom: 10px;">
+                    Buy for {{selectedVideo.price}}$
+                </button>
+                <div *ngIf="creditCardInfo">
+                    <label for="creditCardNumber" style="display: block; margin-bottom: 5px;">Insert Credit Card
+                        Number:</label>
+                    <input type="text" #creditCardNumber id="creditCardNumber" name="creditCardNumber"
+                        placeholder="1234 5678 9012 3456"
+                        style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                    <button (click)="acceptPayment()" class="btn btn-primary" style="width: 100%;">Accept</button>
+                </div>
+            </div>
+
         </div>
 
-        <div class="image-details" style="padding: 0 15px; text-align: left;">
-            <h2>{{ selectedVideo.name }}</h2>
-            <p><strong>Category:</strong> {{selectedVideo.category}}</p>
-            <p><strong>Author:</strong> {{selectedVideo.author}}</p>
-            <p><strong>Download Count:</strong> {{selectedVideo.num_of_downloads}}</p>
-        </div>
     </div>
 </div>

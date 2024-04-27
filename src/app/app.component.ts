@@ -1,6 +1,8 @@
 import { AfterViewChecked, Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators'; // Ispravka za import 'filter'
+import { UserService } from './services/user.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +12,15 @@ import { filter } from 'rxjs/operators'; // Ispravka za import 'filter'
 export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   sideMenuActive = true;
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(private router: Router, private renderer: Renderer2, private userService: UserService) {}
 
   ngOnInit() {
+    let user = this.loadUser();
+    if(user != null){
+      this.userService.setUserData(user);
+    }
     this.router.events.pipe(
+      
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.sideMenuActive = event.url !== '/';
@@ -44,5 +51,19 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
     } else {
       this.renderer.removeStyle(document.body, 'overflow');
     }
+  }
+  loadUser(): User | null {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const userJson = JSON.parse(userData);
+      return new User(
+        userJson.id,
+        userJson.name,
+        userJson.email,
+        undefined,  
+        userJson.token
+      );
+    }
+    return null; 
   }
 }

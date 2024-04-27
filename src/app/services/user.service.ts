@@ -3,39 +3,68 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { Token } from '@angular/compiler';
+import { UserProductsService } from './user-products.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private loggedInUser = new BehaviorSubject<User>(new User(0, "", "",""));
+  private loggedInUser = new BehaviorSubject<User | null>(null);
+  
   public user$ = this.loggedInUser.asObservable();
+  isAuthenticated = false;
 
-  constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   register(user: User): void {
     let userData = { name: user.name, email: user.email, password: user.password };
 
-      this.httpClient.post<{user: User, token: string}>('http://127.0.0.1:8000/api/register', userData).subscribe(user =>{
-      let newUser = new User(user.user.id, user.user.name, user.user.email, undefined, user.token);
-      this.loggedInUser.next(newUser);
-      console.log(newUser);
+    this.httpClient.post<{ user: User; token: string }>('http://127.0.0.1:8000/api/register', userData).subscribe({
+      next: (response) => {
+        let newUser = new User(response.user.id, response.user.name, response.user.email, undefined, response.token);
+        this.loggedInUser.next(newUser);
+        console.log(newUser);
+        this.isAuthenticated = true;
+        alert('Uspešno registrovanje!');
+      },
+      error: (error) => {
+        // Prikazujemo poruku o grešci sa servera ako je dostupna, inače generičku grešku
+        const errorMessage = error.error.message || 'Error while trying to regiter. Check your data!.';
+        alert(`Error: ${errorMessage}`);
+      }
     });
   }
 
-  login(email: string, password: string): Observable<boolean> {
-    const body = { email, password };
+  login(email: string, password: string): void {
+    this.httpClient.post<{ user: User; token: string }>('http://127.0.0.1:8000/api/login', { email, password }).subscribe({
+      next: (response) => {
+        let newUser = new User(response.user.id, response.user.name, response.user.email, undefined, response.token);
+        this.isAuthenticated = true;
+        console.log('Uspešno prijavljivanje!', newUser);
+        alert(`Succesfully LoggedIn`);
+        this.setUserData(newUser);
+        this.router.navigate(['/images']);  
 
-    return this.httpClient.post<{user: User, token: string}>('http://127.0.0.1:8000/api/login', body)
-      .pipe(
-        map(user => {
-          let newUser = new User(user.user.id, user.user.name, user.user.email, undefined, user.token);
-          this.loggedInUser.next(newUser);
-          return true;
-        }), 
-        catchError(error => of(false)) 
-      );
+      },
+      error: (error) => {
+        const errorMessage = error.error.message || 'Neispravni podaci za prijavu';
+        alert(`Error: ${errorMessage}`);
+      }
+    });
   }
 
+  logout(){
+    this.isAuthenticated = false;
+    this.loggedInUser.next(null);
+    localStorage.removeItem('userData');
+  }
+
+  setUserData(user: User){
+    localStorage.setItem('userData', JSON.stringify(user));
+    this.loggedInUser.next(user);
+    this.isAuthenticated = true;
+  }
 }

@@ -20,6 +20,12 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SafePipe } from './safe.pipe';
 import { MyProductsComponent } from './components/my-products/my-products.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,16 +55,21 @@ const routes: Routes = [
     PdfDetailComponent,
     LoginComponent,
     SafePipe,
-    MyProductsComponent
+    MyProductsComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
     PdfViewerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
   
 })

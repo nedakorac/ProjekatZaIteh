@@ -3,6 +3,7 @@ import { first } from 'rxjs';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { UserProductsService } from '../services/user-products.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private userProductService: UserProductsService) {}
 
   login(loginEmail: HTMLInputElement, loginPassword: HTMLInputElement) {
     const email = loginEmail.value;
@@ -19,21 +20,12 @@ export class LoginComponent {
     
     let succesfullyLoggedIn = this.userService.login(email, password);
 
-    if(succesfullyLoggedIn){
-      alert("Uspesno ste se ulogovali!");
-      this.router.navigate(['/images']);  
-    }
-    else{
-      alert("Neuspesno logovanje");
-    }
+
   }
-
-
   register(firstName: HTMLInputElement, lastName: HTMLInputElement, registerEmail: HTMLInputElement, registerPassword: HTMLInputElement) {
     let fullName = firstName.value + " " + lastName.value;
     let user = new User(0, fullName, registerEmail.value, registerPassword.value, undefined )
    
     this.userService.register(user);
-    
   }
 }

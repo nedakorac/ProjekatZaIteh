@@ -1,20 +1,46 @@
-<div class="image-detail-container" style="max-width: 800px; margin: auto;">
+<div *ngIf="selectedImage">
+    <div class="image-detail-container" style="max-width: 800px; margin: auto;">
 
-    <img src="{{ displayedImage }}" class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;">
-</div>
-<div>
-    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 15px;">
-        <div>
-            <button (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary" style="margin-right: 10px;">Show Full Version</button>
-            <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success" style="margin-right: 10px;">Show Free Version</button>
-        </div>
-        <button (click)="buyVersion()" class="btn btn-danger">Buy for {{selectedImage.price | currency:'USD'}}</button>
+        <img src="{{ displayedImage }}" class="img-fluid" style="width: 100%; margin-bottom: 20px; border-radius: 5px;">
     </div>
+    <div>
+        <div style="display: flex; width: 100%;">
+            <!-- Leva kolona -->
+            <div style="width: 70%; padding-right: 20px;">
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <div>
+                        <button (click)="setVersion('full')" [disabled]="isFullVersion" class="btn btn-primary"
+                            style="margin-right: 10px;">Show Full Version</button>
+                        <button (click)="setVersion('free')" [disabled]="isFreeVersion" class="btn btn-success"
+                            style="margin-right: 10px;">Show Free Version</button>
+                    </div>
+                </div>
 
-    <div class="image-details" style="padding: 0 15px; text-align: left;">
-        <h2>{{ selectedImage.name }}</h2>
-        <p><strong>Category:</strong> {{selectedImage.category}}</p>
-        <p><strong>Author:</strong> {{selectedImage.author}}</p>
-        <p><strong>Download Count:</strong> {{selectedImage.num_of_downloads}}</p>
+                <div class="image-details" style="text-align: left;">
+                    <h2>{{ selectedImage.name }}</h2>
+                    <p><strong>Category:</strong> {{selectedImage.category}}</p>
+                    <p><strong>Author:</strong> {{selectedImage.author}}</p>
+                    <p><strong>Download Count:</strong> {{selectedImage.num_of_downloads}}</p>
+                </div>
+            </div>
+
+            <!-- Desna kolona -->
+            <div style="width: 30%; padding-left: 20px; margin-right: 50px;">
+                <button [disabled]="!userService.isAuthenticated" (click)="buyVersion()" class="btn btn-danger"
+                    style="width: 100%; margin-bottom: 10px;">
+                    Buy for {{selectedImage.price}}$
+                </button>
+                <div *ngIf="creditCardInfo">
+                    <label for="creditCardNumber" style="display: block; margin-bottom: 5px;">Insert Credit Card
+                        Number:</label>
+                    <input type="text" #creditCardNumber id="creditCardNumber" name="creditCardNumber"
+                        placeholder="1234 5678 9012 3456"
+                        style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                    <button (click)="acceptPayment()" class="btn btn-primary" style="width: 100%;">Accept</button>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>

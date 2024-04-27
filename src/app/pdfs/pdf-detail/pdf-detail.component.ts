@@ -28,14 +28,18 @@ export class PdfDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.subscription = this.pdfService.pdfs$.subscribe(pdfs => {
-      const pdf = pdfs.find(p => p.product_id === id);
-      if (pdf) {
+    this.subscription = this.pdfService.getProductById(id).subscribe({
+      next: (data) => {
+        let pdf = new Product(data.product_id, data.name, data.price, data.type, data.category, data.author, data.num_of_downloads, data.full_product, data.free_version, data.imageUrl);
         this.selectedPdf = pdf;
+        this.displayedPdf = pdf.free_version;
+        this.setVersion("free");
         this.ready = true;
-        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(pdf.free_version);
-      }
+
+      },
+      error: (error) => console.error('Failed to load product', error)
     });
+    
   }
 
   ngOnDestroy(): void {
