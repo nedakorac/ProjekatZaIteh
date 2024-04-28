@@ -1,0 +1,61 @@
+<div class="container mt-4">
+    <h2>Create New Product</h2>
+    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="product_id">Product ID</label>
+          <input ngModel name="product_id" #product_id="ngModel" type="number" class="form-control" id="product_id" placeholder="Enter product ID" required>
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="name">Name</label>
+          <input ngModel name="name" #name="ngModel" type="text" class="form-control" id="name" placeholder="Enter product name" required>
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="price">Price</label>
+          <input ngModel name="price" #price="ngModel" type="number" class="form-control" id="price" placeholder="Enter product price" required>
+        </div>
+        <div class="col-md-6 form-group">
+            <label for="type">Type</label>
+            <select ngModel name="type" #type="ngModel" class="form-control" id="type" required>
+              <option value="Image">Image</option>
+              <option value="Video">Video</option>
+              <option value="Pdf">Pdf</option>
+            </select>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="category">Category</label>
+          <select ngModel name="category" #category="ngModel" class="form-control" id="category" required>
+            <option value="Nature">Nature</option>
+            <option value="Animals">Animals</option>
+            <option value="Sport">Sport</option>
+            <option value="Cities">Cities</option>
+            <option value="FilmsSeries">Films/Series</option>
+          </select>
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="author">Author</label>
+          <input ngModel name="author" #author="ngModel" type="text" class="form-control" id="author" placeholder="Enter author's name" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 form-group">
+            <label for="imageUrl">Image URL</label>
+            <input ngModel name="imageUrl" #imageUrl="ngModel" type="text" class="form-control" id="imageUrl" placeholder="Enter image URL" required>
+          </div>
+        <div class="col-md-6 form-group">
+          <label for="full_product">Full Product Link</label>
+          <input ngModel name="full_product" #full_product="ngModel" type="text" class="form-control" id="full_product" placeholder="Enter full product link" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="free_version">Free Version Link</label>
+          <input ngModel name="free_version" #free_version="ngModel" type="text" class="form-control" id="free_version" placeholder="Enter free version link" required>
+        </div>
+      </div>
+      <button style="margin-top: 30px;" type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Create Product</button>
+    </form>
+  </div>
+  

@@ -14,18 +14,21 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="pdfs">PDFs</a>
       </li>
+      <li class="nav-item" *ngIf="userService.isAuthenticated && userService.isAdmin">
+        <a class="nav-link" routerLink="createProduct">Create Product</a>
+      </li>
       <li class="nav-item" *ngIf="userService.isAuthenticated">
         <a class="nav-link" routerLink="myProducts">My Products</a>
       </li>
     </ul>
-    <ul class="navbar-nav ms-auto"> 
+    <ul class="navbar-nav ms-auto">
       <li *ngIf="!userService.isAuthenticated" class="nav-item">
           <a class="btn btn-dark" style="width: 100px;" routerLink="/login">Login</a>
       </li>
       <li *ngIf="userService.isAuthenticated" class="nav-item">
-          <a class="btn btn-dark" style="width: 100px;" (click)="onLogout()" >Logout</a>
+          <a class="btn btn-dark" style="width: 100px;" (click)="onLogout()">Logout</a>
       </li>
       <div style="width: 100px;"></div>
-  </ul>
+    </ul>
   </div>
 </nav>

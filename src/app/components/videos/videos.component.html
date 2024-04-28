@@ -14,7 +14,6 @@
                             <p><strong>Title:</strong> {{video.name}}</p>
                             <p><strong>Category:</strong> {{video.category}}</p>
                             <p><strong>Author:</strong> {{video.author}}</p>
-                            <p><strong>Download Count:</strong> {{video.num_of_downloads}}</p>
                             <p><strong>Price:</strong> {{video.price | currency:'USD'}}</p>
                             <!-- Link ka detaljima videa sa routerLink -->
                             <p><a [routerLink]="['/videos', video.product_id]">View Details</a></p>

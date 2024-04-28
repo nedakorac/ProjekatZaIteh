@@ -11,6 +11,7 @@ import { User } from './models/user';
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   sideMenuActive = true;
+  showFrontPage = true;
 
   constructor(private router: Router, private renderer: Renderer2, private userService: UserService) {}
 
@@ -23,8 +24,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
       
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.sideMenuActive = event.url !== '/';
-      if(!this.sideMenuActive){
+      this.showFrontPage = event.url !== '/';
+      this.sideMenuActive = event.url =='/images' ||  event.url =='/videos' ||  event.url =='/pdfs' 
+      if(!this.showFrontPage){
         this.renderer.addClass(document.body, 'no-scroll');
       }
       else{
@@ -35,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
   ngAfterViewChecked() {
     // Ako je sideMenuActive false, dodajemo klasu na body da onemogući skrol
-    if (this.sideMenuActive) {
+    if (this.showFrontPage) {
       this.renderer.removeClass(document.body, 'no-scroll');
     } else {
       this.renderer.addClass(document.body, 'no-scroll');

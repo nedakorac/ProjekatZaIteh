@@ -14,7 +14,6 @@
                             <p><strong>Title:</strong> {{image.name}}</p>
                             <p><strong>Category:</strong> {{image.category}}</p>
                             <p><strong>Author:</strong> {{image.author}}</p>
-                            <p><strong>Download Count:</strong> {{image.num_of_downloads}}</p>
                             <p><strong>Price:</strong> {{image.price | currency:'USD'}}</p>
                             <!-- Link ka detaljima slike sa routerLink -->
                             <p><a [routerLink]="['/images', image.product_id]">View Details</a></p> <!-- Dodat routerLink -->

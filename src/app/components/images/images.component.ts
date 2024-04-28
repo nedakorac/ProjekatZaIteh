@@ -16,8 +16,8 @@ export class ImagesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.imageService.images$.subscribe({
-      next: (images) => {
-        this.images = images;
+      next: (imagesIzBaze) => {
+        this.images = imagesIzBaze;
       },
       error: (error) => console.error('Failed to load images', error)
     });

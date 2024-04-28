@@ -17,7 +17,6 @@ export class OrderService {
         const headers = {
           'Authorization': `Bearer ${user?.token}`
         };
-        console.log(order);
   
         this.httpClient.post<Order>('http://127.0.0.1:8000/api/orders', order, { headers })
           .pipe(

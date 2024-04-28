@@ -11,7 +11,7 @@ export class UserProductsService {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   public products = this.productsSubject.asObservable();
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private httpClient: HttpClient, private userService: UserService) {
     userService.user$.subscribe(data => {
       if (data) {
         console.log(data);
@@ -28,10 +28,9 @@ export class UserProductsService {
     this.userService.user$.pipe(
       switchMap(user => {
         if (!user) {
-          // Možete baciti grešku ili vratiti prazan observable
           return throwError(() => new Error('No user logged in'));
         }
-        return this.http.get<{ data: Product[] }>(`http://127.0.0.1:8000/api/user/${user.id}/orders`).pipe(
+        return this.httpClient.get<{ data: Product[] }>(`http://127.0.0.1:8000/api/user/${user.id}/orders`).pipe(
           map(response => response.data.map(product => new Product(
             product.product_id,
             product.name,
@@ -47,7 +46,6 @@ export class UserProductsService {
         );
       }),
       tap(products => {
-        console.log(products);
         this.productsSubject.next(products);
       }),
       catchError(error => {

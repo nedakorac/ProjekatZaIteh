@@ -19,9 +19,8 @@ export class LoginComponent {
     const password = loginPassword.value;
     
     let succesfullyLoggedIn = this.userService.login(email, password);
-
-
   }
+  
   register(firstName: HTMLInputElement, lastName: HTMLInputElement, registerEmail: HTMLInputElement, registerPassword: HTMLInputElement) {
     let fullName = firstName.value + " " + lastName.value;
     let user = new User(0, fullName, registerEmail.value, registerPassword.value, undefined )

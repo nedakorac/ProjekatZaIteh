@@ -31,11 +31,6 @@ export class MyProductsComponent implements OnInit   {
     });
   }
 
-  goToProduct(id: number){
-    let product = this.products.find(product => product.product_id === id);
-    if (product) {
-      this.router.navigate(['/' + product.type + '/' + product.product_id]);
-    }
-  }
+
   
 }

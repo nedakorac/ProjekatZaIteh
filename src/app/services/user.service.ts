@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 export class UserService {
 
   private loggedInUser = new BehaviorSubject<User | null>(null);
-  
   public user$ = this.loggedInUser.asObservable();
-  isAuthenticated = false;
 
+  isAuthenticated = false;
+  isAdmin = false;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -26,8 +26,8 @@ export class UserService {
       next: (response) => {
         let newUser = new User(response.user.id, response.user.name, response.user.email, undefined, response.token);
         this.loggedInUser.next(newUser);
-        console.log(newUser);
         this.isAuthenticated = true;
+        this.setUserData(newUser);
         alert('Uspešno registrovanje!');
       },
       error: (error) => {
@@ -58,6 +58,7 @@ export class UserService {
 
   logout(){
     this.isAuthenticated = false;
+    this.isAdmin = false;
     this.loggedInUser.next(null);
     localStorage.removeItem('userData');
   }
@@ -66,5 +67,7 @@ export class UserService {
     localStorage.setItem('userData', JSON.stringify(user));
     this.loggedInUser.next(user);
     this.isAuthenticated = true;
+    if(user.email =="admin@gmail.com")
+      this.isAdmin = true;
   }
 }

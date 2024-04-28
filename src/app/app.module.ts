@@ -24,11 +24,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateProductComponent } from './components/create-product/create-product.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'createProduct', component: CreateProductComponent },
   { path: 'myProducts', component: MyProductsComponent },
   { path: 'images/:id', component: ImageDetailsComponent },
   { path: 'images', component: ImagesComponent },
@@ -56,6 +59,7 @@ const routes: Routes = [
     LoginComponent,
     SafePipe,
     MyProductsComponent,
+    CreateProductComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -65,6 +69,7 @@ const routes: Routes = [
     HttpClientModule,
     MatFormFieldModule, 
     MatInputModule, 
+    FormsModule,
     MatDialogModule,
   ],
   providers: [

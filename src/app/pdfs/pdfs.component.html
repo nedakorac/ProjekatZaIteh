@@ -14,7 +14,6 @@
                             <p><strong>Title:</strong> {{pdf.name}}</p>
                             <p><strong>Category:</strong> {{pdf.category}}</p>
                             <p><strong>Author:</strong> {{pdf.author}}</p>
-                            <p><strong>Download Count:</strong> {{pdf.num_of_downloads}}</p>
                             <p><strong>Price:</strong> {{pdf.price | currency:'USD'}}</p>
                             <!-- Link ka detaljima PDF-a sa routerLink -->
                             <p><a [routerLink]="['/pdfs', pdf.product_id]">View Details</a></p> <!-- Izmenjen routerLink -->

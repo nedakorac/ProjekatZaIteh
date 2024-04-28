@@ -1,10 +1,10 @@
 <app-header></app-header>
 <div>
-    <div class="container-fluid"  *ngIf="sideMenuActive">
+    <div class="container-fluid"  *ngIf="showFrontPage">
         <div>
             <div class="row">
                 <!-- Sidebar, prikazuje se samo ako nije početna stranica -->
-                <div class="col-md-2 bg-light vh-100" style="padding-left: 30px; padding-top: 10px;">
+                <div *ngIf="sideMenuActive" class="col-md-2 bg-light vh-100" style="padding-left: 30px; padding-top: 10px;">
                     <app-sidemenu></app-sidemenu>
                 </div>
                 <!-- Glavni sadržaj, dinamički postavlja klase na osnovu rute -->
@@ -15,7 +15,7 @@
         </div>
     </div>
     
-    <div *ngIf="!sideMenuActive">
+    <div *ngIf="!showFrontPage">
         <app-front-page></app-front-page>
     </div>
 </div>
